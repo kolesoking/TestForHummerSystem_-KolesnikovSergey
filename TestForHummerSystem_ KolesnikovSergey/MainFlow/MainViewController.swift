@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-//        scrollView.frame = view.safeAreaLayoutGuide.layoutFrame
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.contentSize = contentSize
         return scrollView
     }()
@@ -106,19 +106,19 @@ private extension MainViewController {
         
         bannersCollectionView.delegate = self
         bannersCollectionView.dataSource = self
-        bannersCollectionView.register(UINib(nibName: "\(BannersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BannersCollectionViewCell.self)")
+        bannersCollectionView.register(UINib(nibName: "\(BunnersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BunnersCollectionViewCell.self)")
         
         // categoriesCollectionView
         
         categoriesCollectionView.delegate = self
         categoriesCollectionView.dataSource = self
-        categoriesCollectionView.register(UINib(nibName: "\(BannersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BannersCollectionViewCell.self)")
+        categoriesCollectionView.register(UINib(nibName: "\(BunnersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BunnersCollectionViewCell.self)")
         
         // menuCollectionView
         
         menuCollectionView.delegate = self
         menuCollectionView.dataSource = self
-        menuCollectionView.register(UINib(nibName: "\(BannersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BannersCollectionViewCell.self)")
+        menuCollectionView.register(UINib(nibName: "\(BunnersCollectionViewCell.self)", bundle: .main), forCellWithReuseIdentifier: "\(BunnersCollectionViewCell.self)")
         
     }
     
@@ -169,21 +169,30 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case bannersCollectionView:
-            return 17
+            return 2
         case categoriesCollectionView:
-            return 15
+            return 2
         default:
-            return 157
+            return 2
             
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = bannersCollectionView.dequeueReusableCell(withReuseIdentifier: "\(BannersCollectionViewCell.self)", for: indexPath)
-        guard let cell = cell as? BannersCollectionViewCell else {
+        let cell = bannersCollectionView.dequeueReusableCell(withReuseIdentifier: "\(BunnersCollectionViewCell.self)", for: indexPath)
+        guard let cell = cell as? BunnersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+        cell.imageName = "111"
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView {
+        case bannersCollectionView:
+            return CGSize(width: 300, height: 112)
+        default:
+            return CGSize(width: 30, height: 30)
+        }
     }
 }
